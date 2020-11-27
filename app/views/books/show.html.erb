@@ -18,9 +18,16 @@
     <%= image_tag @book.image %>
   <% end %>
 </p>
-<%= form_for @book_reviews do |form| %>
-  <%= hidden_field_tag(:user_id, current_user.id) %>
-  <%= hidden_field_tag(:book_id, @book.id) %>
+<h2>Review List</h2>
+<ul>
+  <% @book.book_review.each do |book_review|%>
+   <li><%= book_review.review %>
+     (<i><%= book_review.user_id %>)</li>
+<% end %>
+</ul>
+<%= form_for BookReview.new do |form| %>
+  <%= form.hidden_field :user_id, value: current_user.id %>
+  <%= form.hidden_field :book_id, value: @book.id %>
   <div class="field">
     <%= form.label :review %>
     <%= form.text_area :review %>
