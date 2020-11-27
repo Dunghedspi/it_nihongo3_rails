@@ -18,6 +18,17 @@
     <%= image_tag @book.image %>
   <% end %>
 </p>
+<%= form_for @book_reviews do |form| %>
+  <%= hidden_field_tag(:user_id, current_user.id) %>
+  <%= hidden_field_tag(:book_id, @book.id) %>
+  <div class="field">
+    <%= form.label :review %>
+    <%= form.text_area :review %>
+  </div>
 
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>
